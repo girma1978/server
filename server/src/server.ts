@@ -7,7 +7,7 @@ import { seedEvents } from './seeds/event-seeds.js'; // Import event seed functi
 import { seedRsvps } from './seeds/rsvp-seeds.js'; // Import RSVP seed function
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 
 const forceDatabaseRefresh = false;
 

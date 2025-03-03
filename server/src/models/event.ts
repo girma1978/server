@@ -4,7 +4,7 @@ interface EventAttributes {
   id: number;
   title: string;
   description?: string;
-  date: Date;
+  date: string | Date;  // Change to string | Date for flexibility
   time: string;
   location: string;
   organizerId: number;
@@ -21,7 +21,7 @@ export class Event
   public id!: number;
   public title!: string;
   public description?: string;
-  public date!: Date;
+  public date!: string | Date;  // Change to string | Date for flexibility
   public time!: string;
   public location!: string;
   public organizerId!: number;
@@ -48,10 +48,16 @@ export function EventFactory(sequelize: Sequelize): typeof Event {
       date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
+        validate: {
+          isDate: true, // Ensure date is valid
+        },
       },
       time: {
         type: DataTypes.TIME,
         allowNull: false,
+        validate: {
+          is: /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$/, // Validate time format (24-hour format)
+        },
       },
       location: {
         type: DataTypes.STRING(255),

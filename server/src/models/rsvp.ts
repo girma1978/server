@@ -5,8 +5,8 @@ interface RsvpAttributes {
   userId: number;
   eventId: number;
   status: 'interested' | 'going' | 'not going';
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: Date; // Not needed if you rely on Sequelize auto-generated timestamps
+  updatedAt?: Date; // Not needed if you rely on Sequelize auto-generated timestamps
 }
 
 interface RsvpCreationAttributes extends Optional<RsvpAttributes, 'id'> {}
@@ -58,7 +58,7 @@ export function RsvpFactory(sequelize: Sequelize): typeof Rsvp {
       tableName: 'rsvps',
       sequelize,
       underscored: true,
-      timestamps: true,
+      timestamps: true, // Sequelize will automatically handle createdAt and updatedAt
     }
   );
 
